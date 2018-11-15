@@ -1,4 +1,4 @@
-package org.podcastpedia.podcastpediaapi;
+package org.podcastpedia.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
