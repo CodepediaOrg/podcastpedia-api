@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.podcastpedia.api.podcast.Podcast;
 import org.podcastpedia.api.podcast.PodcastController;
+import org.podcastpedia.api.podcast.PodcastNotFoundException;
 import org.podcastpedia.api.podcast.PodcastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -37,5 +38,13 @@ public class PodcastControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/podcasts/javascript-jabber"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("identifier").value("javascript-jabber"));
+    }
+
+    @Test
+    public void getPodcastByIdentifier_notFound() throws Exception {
+        given(podcastService.getPodcastDetails(anyString())).willThrow(new PodcastNotFoundException());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/podcasts/strang-identifier"))
+                .andExpect(status().isNotFound());
     }
 }

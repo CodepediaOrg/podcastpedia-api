@@ -1,8 +1,7 @@
 package org.podcastpedia.api.podcast;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by ama on 15.11.18.
@@ -20,5 +19,9 @@ public class PodcastController {
     private Podcast getPodcast(@PathVariable String identifier) {
         return podcastService.getPodcastDetails(identifier);
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private void podcastNotFoundHandler(PodcastNotFoundException ex){}
 }
 
