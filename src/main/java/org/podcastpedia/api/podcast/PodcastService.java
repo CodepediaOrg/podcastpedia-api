@@ -5,7 +5,18 @@ package org.podcastpedia.api.podcast;
  */
 public class PodcastService {
 
-    public Podcast getPodcastDetails(String identifier) {
-        return null;
+    private PodcastRepository podcastRepository;
+
+    public PodcastService(PodcastRepository podcastRepository) {
+        this.podcastRepository = podcastRepository;
+    }
+
+    public Podcast getPodcastDetails(String identifier){
+        final Podcast podcast = podcastRepository.findByIdentifier(identifier);
+        if(podcast == null){
+            throw new PodcastNotFoundException();
+        }
+
+        return podcast;
     }
 }
