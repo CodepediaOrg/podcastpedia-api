@@ -1,7 +1,8 @@
 package org.podcastpedia.api.podcast;
 
-public class PodcastRepository {
-    public Podcast findByIdentifier(String identifier) {
-        return null;
-    }
+import org.springframework.data.repository.CrudRepository;
+
+public interface PodcastRepository extends CrudRepository<Podcast,Long> {
+
+     Podcast findByIdentifier(String identifier);
 }
