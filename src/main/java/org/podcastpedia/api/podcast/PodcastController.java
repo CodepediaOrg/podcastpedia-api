@@ -3,6 +3,8 @@ package org.podcastpedia.api.podcast;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by ama on 15.11.18.
  */
@@ -13,6 +15,11 @@ public class PodcastController {
 
     public PodcastController(PodcastService podcastService) {
         this.podcastService = podcastService;
+    }
+
+    @GetMapping("/podcasts/")
+    private List<Podcast> getPodcasts() {
+        return podcastService.getAllPodcasts();
     }
 
     @GetMapping("/podcasts/{identifier}")

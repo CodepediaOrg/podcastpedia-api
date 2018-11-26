@@ -1,8 +1,8 @@
 package org.podcastpedia.api.podcast;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PodcastRepository extends CrudRepository<Podcast,Long> {
+public interface PodcastRepository extends JpaRepository<Podcast,Long> {
 
      Podcast findByIdentifier(String identifier);
 }

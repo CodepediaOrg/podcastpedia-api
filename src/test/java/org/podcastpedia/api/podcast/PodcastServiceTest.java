@@ -6,6 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
@@ -29,6 +32,16 @@ public class PodcastServiceTest {
         final Podcast podcast = podcastService.getPodcastDetails("javascript-jabber");
 
         assertThat(podcast.getIdentifier()).isEqualTo("javascript-jabber");
+    }
+
+    @Test
+    public void getPodcasts_returnsListOfPodcasts() {
+        Podcast mockPodcast = new Podcast("java-podcast");
+        List<Podcast> mockList = new ArrayList<>();
+        mockList.add(mockPodcast);
+        given(podcastRepository.findAll()).willReturn(mockList);
+
+        List<Podcast> allPodcasts = podcastService.getAllPodcasts();
     }
 
     @Test(expected = PodcastNotFoundException.class)
